@@ -36,6 +36,10 @@
     align-items: center;
 }
 
+.justify-content-center {
+    justify-content: center;
+}
+
 .ml-auto {
     margin-left: auto;
 }
@@ -54,6 +58,10 @@
     margin-right: .25em;
 }
 
+.mr-2 {
+    margin-right: .75em;
+}
+
 .ml-1 {
     margin-left: .25em;
 }
@@ -68,6 +76,10 @@
 
 .mt-2 {
     margin-top: .75em;
+}
+
+.mt-4 {
+    margin-top: 1.75em;
 }
 
 .py-1 {
@@ -85,4 +97,8 @@
 
 .float-right {
     float: right;
+}
+
+.text-danger {
+    color: #F56C6C;
 }

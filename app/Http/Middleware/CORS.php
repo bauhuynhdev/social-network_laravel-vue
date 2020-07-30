@@ -18,6 +18,8 @@ class CORS
     {
         $response = $next($request);
         $response->header('Access-Control-Allow-Origin', '*');
+        $response->header('Access-Control-Allow-Headers', '*');
+        $response->header('Accept', 'application/json');
 
         return $response;
     }

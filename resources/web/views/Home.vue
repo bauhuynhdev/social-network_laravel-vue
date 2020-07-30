@@ -1,12 +1,17 @@
 <template>
-    <h1>Home</h1>
+    <el-container>
+        <div class="container">
+            <BoxCardComponent :item="item" :key="item.id" v-for="item in items"/>
+        </div>
+    </el-container>
 </template>
 
 <script>
-    import axios from 'axios'
+    import BoxCardComponent from "../components/BoxCardComponent";
 
     export default {
         name: "Home",
+        components: {BoxCardComponent},
         data() {
             return {
                 input: null,
@@ -14,16 +19,12 @@
             }
         },
         async created() {
-            const respond = await axios.get('http://api.social-network.test/v1/posts');
+            const respond = await axios.get('posts');
             this.items = respond.data.data.data
         }
     }
 </script>
 
 <style scoped>
-    .profile .avatar {
-        width: 50px;
-        height: 50px;
-        border-radius: 100%;
-    }
+
 </style>

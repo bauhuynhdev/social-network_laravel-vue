@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import DefaultLayout from "../layouts/DefaultLayout";
 import Home from "../views/Home";
-import DefaultLayout from '../layouts/default'
-import Auth from "../views/Auth";
+import {hasToken} from "../services/tokenService";
+
+import store from '../store'
 
 Vue.use(VueRouter);
 
@@ -12,17 +14,23 @@ const routes = [
         component: DefaultLayout,
         children: [
             {
-                path: '/home',
+                path: '',
                 component: Home
-            },
-            {
-                path: '/auth',
-                component: Auth
             }
         ]
     }
 ]
 
-export default new VueRouter({
+const router = new VueRouter({
     routes
 });
+
+router.beforeEach((to, from, next) => {
+    if (hasToken()) {
+        store.dispatch('auth/me')
+    }
+
+    next()
+})
+
+export default router

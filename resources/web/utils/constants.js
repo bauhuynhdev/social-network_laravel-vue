@@ -1,0 +1,1 @@
+export const TOKEN_NAME = 'kSdX3vEXwGv9QWXWv6a3lw3TuNgHcDZo6jY5m2YWDvwMZUA7dorVc3zjOY6dNgFM'

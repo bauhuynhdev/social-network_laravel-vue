@@ -24,6 +24,7 @@ Route::domain($apiDomain)->group(function () {
                 Route::post('login', 'AuthController@login');
                 Route::get('me', 'AuthController@me');
                 Route::post('refresh', 'AuthController@refresh');
+                Route::get('logout', 'AuthController@logout');
             });
 
             Route::prefix('posts')->group(function () {
