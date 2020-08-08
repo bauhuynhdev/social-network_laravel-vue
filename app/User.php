@@ -17,7 +17,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -26,7 +28,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -41,6 +44,11 @@ class User extends Authenticatable implements JWTSubject
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    public function mutualFriends()
+    {
+        return $this->friends()->where('friend_id', auth()->user()->id);
     }
 
     public function friends()

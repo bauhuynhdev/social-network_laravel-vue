@@ -17,9 +17,17 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user')
-            ->withCount('likes AS likes')
+        $posts = Post::with(
+            [
+                'user' => function ($user) {
+                    if (auth()->check()) {
+                        $user->with('mutualFriends');
+                    }
+                }
+            ]
+        )
             ->withCount('comments AS comments')
+            ->withCount('likes AS likes')
             ->paginate(
                 config('custom.paginate')
             );
@@ -49,7 +57,7 @@ class PostController extends Controller
     {
         $params = $request->only('content');
         $post = $this->getPostByOwner($id);
-        if (!$post->count()) {
+        if ( ! $post->count()) {
             return $this->respondError('You cannot update this post!');
         }
         $post->update($params);
@@ -67,7 +75,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = $this->getPostByOwner($id);
-        if (!$post->count()) {
+        if ( ! $post->count()) {
             return $this->respondError('You cannot delete this post!');
         }
         $post->delete();

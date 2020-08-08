@@ -16,9 +16,10 @@
             <div>
                 <p>{{ item.content}}</p>
             </div>
-            <div class="d-flex mt-2">
-                <span><i class="el-icon-sugar mr-1"></i>{{ item.likes }}</span>
-                <span><i class="el-icon-chat-dot-round ml-2 mr-1"></i>{{ item.comments }}</span>
+            <div class="d-flex mt-2 align-items-center">
+                <span><i class="el-icon-sugar mr-1"></i>{{ item.likes.length }}</span>
+                <span><i class="el-icon-chat-dot-round ml-2 mr-1"></i>{{ item.comments.length }}</span>
+                <el-button v-if="isAuthenticated" type="primary" class="ml-auto" icon="el-icon-chat-dot-round" circle></el-button>
             </div>
         </div>
     </el-card>
@@ -26,9 +27,13 @@
 
 <script>
     import AvatarComponent from "./AvatarComponent";
+    import {mapGetters} from 'vuex'
     export default {
         name: "BoxCardComponent",
         components: {AvatarComponent},
-        props: ['item']
+        props: ['item'],
+        computed: {
+            ...mapGetters('auth', ['isAuthenticated'])
+        }
     }
 </script>
